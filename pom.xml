@@ -16,6 +16,36 @@
 		<module>infinitest-eclipse</module>
 	</modules>
 
+	<distributionManagement>
+	
+		<!-- <repository>
+			<id>sonatype-nexus-staging</id>
+			<name>Nexus Release Repository</name>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+		</repository>
+		<snapshotRepository>
+			<id>sonatype-nexus-snapshots</id>
+			<name>Sonatype Nexus Snapshots</name>
+			<url>${sonatypeOssDistMgmtSnapshotsUrl}</url>
+		</snapshotRepository>
+ -->
+		<repository>
+			<id>kazan-release-repo</id>
+			<name>CIP Kazan Repository for Maven2</name>
+			<url>https://kazan.priv.atos.fr/nexus/content/repositories/releases
+			</url>
+		</repository>
+
+		<snapshotRepository>
+			<id>kazan-snapshot-repo</id>
+			<name>CIP Kazan Snapshot Repository for Maven2</name>
+			<url>https://kazan.priv.atos.fr/nexus/content/repositories/snapshots
+			</url>
+		</snapshotRepository>
+
+	</distributionManagement>
+
+
 	<prerequisites>
 		<maven>3.1</maven>
 	</prerequisites>
