@@ -5,12 +5,12 @@
 	<parent>
 		<groupId>org.infinitest</groupId>
 		<artifactId>infinitest-parent</artifactId>
-		<version>5.1.114-SNAPSHOT</version>
+		<version>0.0.42-EXPERIMENTAL-SNAPSHOT</version>
 	</parent>
 
 	<name>Infinitest Lib</name>
 	<artifactId>infinitest-lib</artifactId>
-	
+
 	<dependencies>
 		<dependency>
 			<groupId>org.assertj</groupId>
@@ -19,10 +19,10 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-	<groupId>jgraph</groupId>
-	<artifactId>jgraph</artifactId>
-	<version>5.13.0.0</version>
-</dependency>
+			<groupId>jgraph</groupId>
+			<artifactId>jgraph</artifactId>
+			<version>5.13.0.0</version>
+		</dependency>
 		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-core</artifactId>
@@ -67,5 +67,37 @@
 			<version>2.6</version>
 		</dependency>
 	</dependencies>
-	
+	<build>
+		<plugins>
+			<!-- packaging de l'application -->
+			<plugin>
+				<!-- NOTE: We don't need a groupId specification because the group is 
+					org.apache.maven.plugins ...which is assumed by default. -->
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>2.5.5</version>
+				<configuration>
+					<descriptorRefs>
+						<descriptorRef>jar-with-dependencies</descriptorRef>
+					</descriptorRefs>
+					<descriptors>
+						<descriptor>src/main/assembly/jar.xml</descriptor>
+					</descriptors>
+					<archive>
+						<manifest>
+							<mainClass>aa.worldline.vbu.infinitest.Report</mainClass>
+						</manifest>
+					</archive>
+				</configuration>
+				<executions>
+					<execution>
+						<id>executable</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 </project>

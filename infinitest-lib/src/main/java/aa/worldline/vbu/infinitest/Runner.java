@@ -1,4 +1,4 @@
-package org.infinitest.runner;
+package aa.worldline.vbu.infinitest;
 
 import static java.util.Arrays.asList;
 
@@ -41,40 +41,6 @@ import org.junit.runner.manipulation.Sortable;
 import com.google.common.reflect.ClassPath;
 
 public class Runner {
-
-	private static final Color DEFAULT_BG_COLOR = Color.decode("#FAFBFF");
-	private static final Dimension DEFAULT_SIZE = new Dimension(530, 320);
-	static DirectedGraph<JavaClass, DefaultEdge> graph;
-	//
-	private JGraphModelAdapter m_jgAdapter;
-
-	/**
-	 * @see java.applet.Applet#init().
-	 */
-	/*
-	 * public void init() { // create a JGraphT graph String [] args =
-	 * {"C:/Data/Cedicam/IBO5_7/wlp-cms-gitrepository-1/wlp-cms-core"};
-	 * main(args);
-	 * 
-	 * // create a visualization using JGraph, via an adapter m_jgAdapter = new
-	 * JGraphModelAdapter(graph);
-	 * 
-	 * JGraph jgraph = new JGraph(m_jgAdapter);
-	 * 
-	 * adjustDisplaySettings(jgraph); getContentPane().add(jgraph);
-	 * resize(DEFAULT_SIZE); }
-	 * 
-	 * private void adjustDisplaySettings(JGraph jg) {
-	 * jg.setPreferredSize(DEFAULT_SIZE);
-	 * 
-	 * Color c = DEFAULT_BG_COLOR; String colorStr = null;
-	 * 
-	 * try { colorStr = getParameter("bgcolor"); } catch (Exception e) { }
-	 * 
-	 * if (colorStr != null) { c = Color.decode(colorStr); }
-	 * 
-	 * jg.setBackground(c); }
-	 */
 
 	public static String root;
 
@@ -120,7 +86,6 @@ public class Runner {
 
 	}
 
-	@SuppressWarnings("static-access")
 	public static void main(String[] args) {
 		System.out.println("[Infinitest]Begin treatment");
 		root = args[0];
@@ -158,11 +123,6 @@ public class Runner {
 			core.update((Collection<File>) newColl);
 		}
 		// a third time is necessary -> should comparison made!
-		for (File f : changeFiles) {
-			List<File> newColl = new ArrayList<File>();
-			newColl.add(f);
-			core.update((Collection<File>) newColl);
-		}
 		String targetDirectory = "infinitestExport/";
 		new File(targetDirectory).mkdirs();
 		PrintWriter writer = null;
