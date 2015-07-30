@@ -42,7 +42,7 @@ import org.infinitest.filter.*;
  */
 public class ClassFileTestDetector implements TestDetector {
 	private final TestFilter filters;
-	private ClassFileIndex index;
+	public ClassFileIndex index;//TODO
 	private ClasspathProvider classpath;
 
 	public ClassFileTestDetector(TestFilter testFilterList) {
@@ -76,8 +76,9 @@ public class ClassFileTestDetector implements TestDetector {
 
 	private Set<JavaClass> filterTests(Set<JavaClass> changedClasses) {
 		Set<JavaClass> testsToRun = new HashSet<JavaClass>();
+		
 		for (JavaClass jclass : changedClasses) {
-			if (isATest(jclass) && inCurrentProject(jclass)) {
+			if (isATest(jclass) /*&& inCurrentProject(jclass)*/) {
 				testsToRun.add(jclass);
 			} else {
 				log(Level.FINE, "Filtered test: " + jclass);

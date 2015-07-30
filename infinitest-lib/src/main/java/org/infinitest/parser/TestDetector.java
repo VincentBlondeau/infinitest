@@ -33,6 +33,8 @@ import java.util.*;
 import org.infinitest.*;
 
 public interface TestDetector {
+	public ClassFileIndex index=null;//TODO
+
 	void clear();
 
 	Set<JavaClass> findTestsToRun(Collection<File> changedFiles);

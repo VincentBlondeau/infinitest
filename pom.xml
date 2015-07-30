@@ -147,7 +147,7 @@
 				<configuration>
 					<downloadSources>true</downloadSources>
 					<downloadJavadocs>true</downloadJavadocs>
-					<additionalConfig>
+					<!-- <additionalConfig>
 						<file>
 							<name>.settings/org.eclipse.jdt.core.prefs</name>
 							<location>${user.dir}/artifacts/eclipse_settings/org.eclipse.jdt.core.prefs</location>
@@ -156,7 +156,7 @@
 							<name>.settings/org.eclipse.jdt.ui.prefs</name>
 							<location>${user.dir}/artifacts/eclipse_settings/org.eclipse.jdt.ui.prefs</location>
 						</file>
-					</additionalConfig>
+					</additionalConfig> -->
 				</configuration>
 			</plugin>
 			<plugin>

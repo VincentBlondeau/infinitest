@@ -30,11 +30,17 @@ package org.infinitest.parser;
 import static com.google.common.collect.Sets.*;
 import static org.jgrapht.Graphs.*;
 
+import java.awt.Color;
+import java.awt.Dimension;
 import java.io.*;
 import java.util.*;
 
+import javax.swing.JApplet;
+
 import org.infinitest.*;
+import org.jgraph.JGraph;
 import org.jgrapht.*;
+import org.jgrapht.ext.*;
 import org.jgrapht.graph.*;
 
 import com.google.common.annotations.*;
@@ -42,7 +48,7 @@ import com.google.common.collect.*;
 
 public class ClassFileIndex {
 	private final JavaClassBuilder builder;
-	private DirectedGraph<JavaClass, DefaultEdge> graph;
+	public DirectedGraph<JavaClass, DefaultEdge> graph; // TODO
 
 	public ClassFileIndex(ClasspathProvider classpath) {
 		this(new JavaClassBuilder(classpath));
@@ -51,7 +57,8 @@ public class ClassFileIndex {
 	@VisibleForTesting
 	ClassFileIndex(JavaClassBuilder classBuilder) {
 		builder = classBuilder;
-		graph = new DefaultDirectedGraph<JavaClass, DefaultEdge>(DefaultEdge.class);
+		graph = new DefaultDirectedGraph<JavaClass, DefaultEdge>(
+				DefaultEdge.class);
 	}
 
 	public Set<JavaClass> findClasses(Collection<File> changedFiles) {
@@ -120,6 +127,7 @@ public class ClassFileIndex {
 		for (JavaClass each : incomingEdges) {
 			graph.addEdge(each, newClass);
 		}
+		export();
 	}
 
 	private void updateParentReferences(JavaClass parentClass) {
@@ -128,6 +136,7 @@ public class ClassFileIndex {
 			if ((childClass != null) && !childClass.equals(parentClass)) {
 				if (graph.containsVertex(childClass)) {
 					graph.addEdge(parentClass, childClass);
+					export();
 				}
 			}
 		}
@@ -152,8 +161,23 @@ public class ClassFileIndex {
 		}
 	}
 
+	public void export() {
+
+		/*DOTExporter exporter = new DOTExporter();
+		String targetDirectory = "graph/";
+		new File(targetDirectory).mkdirs();
+		try {
+			exporter.export(new FileWriter(targetDirectory
+					+ "initial-graph"+System.currentTimeMillis()+".dot"), graph);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
+	}
+
 	public void clear() {
-		graph = new DefaultDirectedGraph<JavaClass, DefaultEdge>(DefaultEdge.class);
+		graph = new DefaultDirectedGraph<JavaClass, DefaultEdge>(
+				DefaultEdge.class);
 	}
 
 	public boolean isIndexed(Class<Object> clazz) {

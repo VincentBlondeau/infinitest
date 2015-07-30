@@ -35,7 +35,7 @@ import java.util.logging.*;
  * @author <a href="mailto:benrady@gmail.com"Ben Rady</a>
  */
 public class InfinitestGlobalSettings {
-	private static Level logLevel = Level.INFO;
+	private static Level logLevel = Level.ALL;
 	private static long slowTestTimeLimit = 500;
 
 	public static void resetToDefaults() {

@@ -30,6 +30,8 @@ package org.infinitest;
 import java.io.*;
 import java.util.*;
 
+import org.infinitest.parser.JavaClass;
+import org.infinitest.parser.TestDetector;
 import org.infinitest.testrunner.*;
 
 /**
@@ -40,6 +42,7 @@ import org.infinitest.testrunner.*;
  * multiple InfinitestCore instances to watch all the sub-modules.
  */
 public interface InfinitestCore {
+	public TestDetector testDetector=null; //TODO 
 	/**
 	 * Subscribe to this event to be notified about changes in the test queue.
 	 */
@@ -74,7 +77,7 @@ public interface InfinitestCore {
 	/**
 	 * Uses a list of changed files instead of searching for them
 	 */
-	int update(Collection<File> changedFiles);
+	Collection<JavaClass> update(Collection<File> changedFiles);
 
 	/**
 	 * Re-indexes all the classes in the output directory and re-runs all the

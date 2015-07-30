@@ -137,7 +137,8 @@ public class JavaAssistClassParser {
 		try {
 			inputStream = new FileInputStream(file);
 
-			CtClass ctClass = getClassPool().makeClass(inputStream);
+			CtClass ctClass = getClassPool().
+					makeClass(inputStream);
 			String classname = ctClass.getName();
 
 			CLASSES_BY_NAME.remove(classname);

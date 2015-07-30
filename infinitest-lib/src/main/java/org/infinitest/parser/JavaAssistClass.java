@@ -59,6 +59,7 @@ public class JavaAssistClass extends AbstractJavaClass {
 		imports = findImports(classReference);
 		isATest = !isAbstract(classReference) && hasTests(classReference) && canInstantiate(classReference);
 		className = classReference.getName();
+		
 	}
 
 	@Override

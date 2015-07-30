@@ -30,6 +30,7 @@ package org.infinitest;
 import java.io.*;
 import java.util.*;
 
+import org.infinitest.parser.JavaClass;
 import org.infinitest.testrunner.*;
 
 @SuppressWarnings("all")
@@ -84,7 +85,7 @@ public class FakeInfinitestCore implements InfinitestCore {
 		throw new UnsupportedOperationException();
 	}
 
-	public int update(Collection<File> changedFiles) {
+	public Collection<JavaClass> update(Collection<File> changedFiles) {
 		throw new UnsupportedOperationException();
 	}
 }

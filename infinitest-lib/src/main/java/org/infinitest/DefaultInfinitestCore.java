@@ -45,7 +45,7 @@ import org.infinitest.testrunner.queue.*;
  */
 class DefaultInfinitestCore implements InfinitestCore {
 	private final TestRunner runner;
-	private TestDetector testDetector;
+	public TestDetector testDetector; //TODO 
 	private ChangeDetector changeDetector;
 	private final Set<Class<? extends Throwable>> caughtExceptions;
 	private final EventNormalizer normalizer;
@@ -76,9 +76,9 @@ class DefaultInfinitestCore implements InfinitestCore {
 	}
 
 	@Override
-	public synchronized int update(Collection<File> changedFiles) {
+	public synchronized Collection<JavaClass> update(Collection<File> changedFiles) {
 		log(CONFIG, "Core Update " + name);
-		int testsRun = runOptimizedTestSet(changedFiles);
+		Collection<JavaClass> testsRun = runOptimizedTestSet2(changedFiles);
 		caughtExceptions.clear();
 		return testsRun;
 	}
@@ -88,7 +88,7 @@ class DefaultInfinitestCore implements InfinitestCore {
 	@Override
 	public synchronized int update() {
 		try {
-			return update(findChangedClassFiles());
+			return update(findChangedClassFiles()).size();
 		} catch (IOException e) {
 			checkForFatalError(e);
 		}
@@ -106,7 +106,8 @@ class DefaultInfinitestCore implements InfinitestCore {
 
 	@Override
 	public void setRuntimeEnvironment(RuntimeEnvironment environment) {
-		if ((currentEnvironment == null) || !environment.equals(currentEnvironment)) {
+		if ((currentEnvironment == null)
+				|| !environment.equals(currentEnvironment)) {
 			currentEnvironment = environment;
 			runner.setRuntimeEnvironment(environment);
 			changeDetector.setClasspathProvider(environment);
@@ -115,16 +116,22 @@ class DefaultInfinitestCore implements InfinitestCore {
 		}
 	}
 
-	private int runOptimizedTestSet(Collection<File> changedFiles) {
+	private Collection<JavaClass> runOptimizedTestSet2(
+			Collection<File> changedFiles) {
 		Set<String> oldTests = testDetector.getCurrentTests();
-		Collection<JavaClass> testsToRun = testDetector.findTestsToRun(changedFiles);
+		Collection<JavaClass> testsToRun = testDetector
+				.findTestsToRun(changedFiles);
 		Set<String> newTests = testDetector.getCurrentTests();
 		fireDisabledTestEvents(difference(oldTests, newTests));
 		if (!testsToRun.isEmpty()) {
 			log(name + " Running tests: " + testsToRun);
 			runTests(testsToRun);
 		}
-		return testsToRun.size();
+		return testsToRun;
+	}
+
+	private int runOptimizedTestSet(Collection<File> changedFiles) {
+		return runOptimizedTestSet2(changedFiles).size();
 	}
 
 	private Collection<File> findChangedClassFiles() throws IOException {
@@ -163,13 +170,15 @@ class DefaultInfinitestCore implements InfinitestCore {
 
 	@Override
 	public void addTestQueueListener(TestQueueListener listener) {
-		getRunner().addTestQueueListener(normalizer.testQueueNormalizer(listener));
+		getRunner().addTestQueueListener(
+				normalizer.testQueueNormalizer(listener));
 		reloadListeners.add(listener);
 	}
 
 	@Override
 	public void removeTestQueueListener(TestQueueListener listener) {
-		getRunner().removeTestQueueListener(normalizer.testQueueNormalizer(listener));
+		getRunner().removeTestQueueListener(
+				normalizer.testQueueNormalizer(listener));
 		reloadListeners.remove(listener);
 	}
 
@@ -184,12 +193,14 @@ class DefaultInfinitestCore implements InfinitestCore {
 
 	@Override
 	public void addConsoleOutputListener(ConsoleOutputListener listener) {
-		getRunner().addConsoleOutputListener(normalizer.consoleEventNormalizer(listener));
+		getRunner().addConsoleOutputListener(
+				normalizer.consoleEventNormalizer(listener));
 	}
 
 	@Override
 	public void removeConsoleOutputListener(ConsoleOutputListener listener) {
-		getRunner().removeConsoleOutputListener(normalizer.consoleEventNormalizer(listener));
+		getRunner().removeConsoleOutputListener(
+				normalizer.consoleEventNormalizer(listener));
 	}
 
 	@Override
@@ -229,7 +240,7 @@ class DefaultInfinitestCore implements InfinitestCore {
 
 	private void runTests(Collection<JavaClass> testsToRun) {
 		List<String> tests = classesToNames(testsToRun);
-		getRunner().runTests(tests);
+		// getRunner().runTests(tests);
 	}
 
 	private List<String> classesToNames(Collection<JavaClass> classes) {
