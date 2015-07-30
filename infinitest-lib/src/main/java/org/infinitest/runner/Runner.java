@@ -148,13 +148,21 @@ public class Runner {
 		for (File f : changeFiles) {
 			List<File> newColl = new ArrayList<File>();
 			newColl.add(f);
-
 			core.update((Collection<File>) newColl);
 		}
 		// exec twice to have the model created to have the graph representing
 		// the code made
-		// a third time can be necessary.... -> should be compared.
-		System.out.println("[Infinitest]Treatment ended!");
+		for (File f : changeFiles) {
+			List<File> newColl = new ArrayList<File>();
+			newColl.add(f);
+			core.update((Collection<File>) newColl);
+		}
+		// a third time is necessary -> should comparison made!
+		for (File f : changeFiles) {
+			List<File> newColl = new ArrayList<File>();
+			newColl.add(f);
+			core.update((Collection<File>) newColl);
+		}
 		String targetDirectory = "infinitestExport/";
 		new File(targetDirectory).mkdirs();
 		PrintWriter writer = null;
@@ -166,9 +174,9 @@ public class Runner {
 			}
 		};
 		Collections.sort(changeFiles, comparator);
-		executeAndSerialize("infinitestExport2", core, changeFiles, writer);
-		executeAndSerialize("infinitestExport3", core, changeFiles, writer);
-		executeAndSerialize("infinitestExport4", core, changeFiles, writer);
+		executeAndSerialize(targetDirectory + "infinitestExport", core, changeFiles, writer);
+		//executeAndSerialize("infinitestExport3", core, changeFiles, writer);
+		//executeAndSerialize("infinitestExport4", core, changeFiles, writer);
 
 		System.out.println("[Infinitest]All treatments ended!");
 	}
