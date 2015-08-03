@@ -84,7 +84,7 @@
 					</descriptors>
 					<archive>
 						<manifest>
-							<mainClass>aa.worldline.vbu.infinitest.Report</mainClass>
+							<mainClass>aa.worldline.vbu.infinitest.Runner</mainClass>
 						</manifest>
 					</archive>
 				</configuration>
