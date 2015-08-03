@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-				 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.infinitest</groupId>
 	<artifactId>infinitest-parent</artifactId>
@@ -12,23 +12,13 @@
 	<modules>
 		<module>infinitest-lib</module>
 		<module>infinitest-runner</module>
-		<module>infinitest-intellij</module>
-		<module>infinitest-eclipse</module>
 	</modules>
-
 	<distributionManagement>
-	
-		<!-- <repository>
-			<id>sonatype-nexus-staging</id>
-			<name>Nexus Release Repository</name>
-			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-		</repository>
-		<snapshotRepository>
-			<id>sonatype-nexus-snapshots</id>
-			<name>Sonatype Nexus Snapshots</name>
-			<url>${sonatypeOssDistMgmtSnapshotsUrl}</url>
-		</snapshotRepository>
- -->
+
+		<!-- <repository> <id>sonatype-nexus-staging</id> <name>Nexus Release Repository</name> 
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url> 
+			</repository> <snapshotRepository> <id>sonatype-nexus-snapshots</id> <name>Sonatype 
+			Nexus Snapshots</name> <url>${sonatypeOssDistMgmtSnapshotsUrl}</url> </snapshotRepository> -->
 		<repository>
 			<id>kazan-release-repo</id>
 			<name>CIP Kazan Repository for Maven2</name>
@@ -172,16 +162,10 @@
 				<configuration>
 					<downloadSources>true</downloadSources>
 					<downloadJavadocs>true</downloadJavadocs>
-					<!-- <additionalConfig>
-						<file>
-							<name>.settings/org.eclipse.jdt.core.prefs</name>
-							<location>${user.dir}/artifacts/eclipse_settings/org.eclipse.jdt.core.prefs</location>
-						</file>
-						<file>
-							<name>.settings/org.eclipse.jdt.ui.prefs</name>
-							<location>${user.dir}/artifacts/eclipse_settings/org.eclipse.jdt.ui.prefs</location>
-						</file>
-					</additionalConfig> -->
+					<!-- <additionalConfig> <file> <name>.settings/org.eclipse.jdt.core.prefs</name> 
+						<location>${user.dir}/artifacts/eclipse_settings/org.eclipse.jdt.core.prefs</location> 
+						</file> <file> <name>.settings/org.eclipse.jdt.ui.prefs</name> <location>${user.dir}/artifacts/eclipse_settings/org.eclipse.jdt.ui.prefs</location> 
+						</file> </additionalConfig> -->
 				</configuration>
 			</plugin>
 			<plugin>
@@ -219,7 +203,7 @@
 						</goals>
 						<configuration>
 							<rules>
-								<requireUpperBoundDep/>
+								<requireUpperBoundDep />
 							</rules>
 						</configuration>
 					</execution>
