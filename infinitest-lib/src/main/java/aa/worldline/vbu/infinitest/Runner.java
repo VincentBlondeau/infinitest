@@ -78,6 +78,7 @@ public class Runner {
 
 	public static Collection<File> getCollectionOfFileFromFolder(File folder) {
 		// Directory path here
+		System.out.println("[Infninitest debug]Folder=" + folder);
 		Collection<File> listOfFiles = FileUtils.listFiles(folder,
 				new org.apache.commons.io.filefilter.RegexFileFilter(
 						".*\\.class"), DirectoryFileFilter.DIRECTORY);
@@ -94,6 +95,10 @@ public class Runner {
 		final ConcurrencyController concurrencyController = new MultiCoreConcurrencyController();
 		RuntimeEnvironment environment = new RuntimeEnvironment(buildPaths(),
 				workingDirectory(), systemClasspath(), currentJavaHome());
+		System.out.println("[Infinitest]Env: buildPaths" + buildPaths());
+		System.out.println("[Infinitest]Env: PWD: " + workingDirectory());
+		System.out.println("[Infinitest]Env: System CP: " + systemClasspath());
+		System.out.println("[Infinitest]Env: JavaHome: " + currentJavaHome());
 
 		InfinitestCoreBuilder coreBuilder = new InfinitestCoreBuilder(
 				environment, eventQueue);
@@ -106,6 +111,7 @@ public class Runner {
 				.classDirectoriesInClasspath();
 		collectionOfFiles.addAll(buildPaths());
 		List<File> changeFiles = new ArrayList<File>();
+		System.out.println("[Infinitest debug]Files changed:" + changeFiles);
 		for (File f : collectionOfFiles) {
 			changeFiles.addAll(getCollectionOfFileFromFolder(f));
 		}
@@ -134,9 +140,10 @@ public class Runner {
 			}
 		};
 		Collections.sort(changeFiles, comparator);
-		executeAndSerialize(targetDirectory + "infinitestExport", core, changeFiles, writer);
-		//executeAndSerialize("infinitestExport3", core, changeFiles, writer);
-		//executeAndSerialize("infinitestExport4", core, changeFiles, writer);
+		executeAndSerialize(targetDirectory + "infinitestExport", core,
+				changeFiles, writer);
+		// executeAndSerialize("infinitestExport3", core, changeFiles, writer);
+		// executeAndSerialize("infinitestExport4", core, changeFiles, writer);
 
 		System.out.println("[Infinitest]All treatments ended!");
 	}
@@ -163,7 +170,7 @@ public class Runner {
 				};
 				List<JavaClass> list = new ArrayList<JavaClass>(res);
 				Collections.sort(list, comparator);
-				
+
 				for (JavaClass clazz : res) {
 					writer.println("\t" + clazz + ",");
 				}
