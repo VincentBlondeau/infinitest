@@ -136,7 +136,7 @@ public class RuntimeEnvironment implements ClasspathProvider {
 	}
 
 	private List<String> getClasspathElements(String classpath) {
-		return newArrayList(classpath.split(pathSeparator));
+		return newArrayList(classpath.split(";"));//TODO that is changed to work with the current implementation on jenkins and cie...
 	}
 
 	private String getJavaExecutable() {
