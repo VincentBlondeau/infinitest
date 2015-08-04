@@ -41,6 +41,8 @@ import org.junit.runner.manipulation.Sortable;
 import com.google.common.reflect.ClassPath;
 
 public class Runner {
+	
+	public static String separatorOfJavaClassPath=";";
 
 	public static String root;
 
@@ -111,11 +113,11 @@ public class Runner {
 				.classDirectoriesInClasspath();
 		collectionOfFiles.addAll(buildPaths());
 		List<File> changeFiles = new ArrayList<File>();
-		System.out.println("[Infinitest debug]Files changed:" + changeFiles);
+
 		for (File f : collectionOfFiles) {
 			changeFiles.addAll(getCollectionOfFileFromFolder(f));
 		}
-
+		System.out.println("[Infinitest debug]Files changed:" + changeFiles);
 		for (File f : changeFiles) {
 			List<File> newColl = new ArrayList<File>();
 			newColl.add(f);

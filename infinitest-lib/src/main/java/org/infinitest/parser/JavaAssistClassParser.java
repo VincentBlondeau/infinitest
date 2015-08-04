@@ -76,7 +76,7 @@ public class JavaAssistClassParser {
 	}
 
 	private Iterable<String> getPathElements() {
-		List<String> entries = newArrayList(on(pathSeparator).split(classpath));
+		List<String> entries = newArrayList(on(aa.worldline.vbu.infinitest.Runner.separatorOfJavaClassPath).split(classpath));
 		ListIterator<String> iter = entries.listIterator();
 		while (iter.hasNext()) {
 			if (entryDoesNotExist(iter)) {
