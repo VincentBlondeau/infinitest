@@ -91,17 +91,18 @@ public class Runner {
 
 	public static void main(String[] args) {
 		System.out.println("[Infinitest]Begin treatment");
+		System.out.println("[infinitest] pathSeparator: "+ File.pathSeparator);
 		root = args[0];
 		System.out.println("[Infinitest]The directory used is:" + root);
 		final EventQueue eventQueue = null;
 		final ConcurrencyController concurrencyController = new MultiCoreConcurrencyController();
 		RuntimeEnvironment environment = new RuntimeEnvironment(buildPaths(),
 				workingDirectory(), systemClasspath(), currentJavaHome());
-		System.out.println("[Infinitest]Env: buildPaths" + buildPaths());
+	/*	System.out.println("[Infinitest]Env: buildPaths" + buildPaths());
 		System.out.println("[Infinitest]Env: PWD: " + workingDirectory());
 		System.out.println("[Infinitest]Env: System CP: " + systemClasspath());
 		System.out.println("[Infinitest]Env: JavaHome: " + currentJavaHome());
-
+*/
 		InfinitestCoreBuilder coreBuilder = new InfinitestCoreBuilder(
 				environment, eventQueue);
 		coreBuilder.setUpdateSemaphore(concurrencyController);
@@ -123,6 +124,7 @@ public class Runner {
 			newColl.add(f);
 			core.update((Collection<File>) newColl);
 		}
+		System.out.println("[Infinitest]End step 1!");
 		// exec twice to have the model created to have the graph representing
 		// the code made
 		for (File f : changeFiles) {
@@ -130,6 +132,7 @@ public class Runner {
 			newColl.add(f);
 			core.update((Collection<File>) newColl);
 		}
+		System.out.println("[Infinitest]End step 2!");
 		// a third time is necessary -> should comparison made!
 		String targetDirectory = "infinitestExport/";
 		new File(targetDirectory).mkdirs();
