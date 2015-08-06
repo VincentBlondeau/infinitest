@@ -42,8 +42,6 @@ import com.google.common.reflect.ClassPath;
 
 public class Runner {
 	
-	public static String separatorOfJavaClassPath=";";
-
 	public static String root;
 
 	public static File currentJavaHome() {

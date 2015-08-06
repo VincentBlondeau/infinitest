@@ -114,7 +114,7 @@ public class RuntimeEnvironment implements ClasspathProvider {
 		String infinitestJarPath = findInfinitestJar();
 		log(CONFIG, "Found infinitest jar classpath entry at " + infinitestJarPath);
 		if (infinitestJarPath != null) {
-			completeClasspath = completeClasspath + aa.worldline.vbu.infinitest.Runner.separatorOfJavaClassPath + infinitestJarPath;//TODO was pathSeparator
+			completeClasspath = completeClasspath + File.pathSeparator + infinitestJarPath;
 		} else {
 			log(SEVERE, "Could not find a classpath entry for Infinitest Core in " + infinitestRuntimeClasspath);
 		}
@@ -136,7 +136,7 @@ public class RuntimeEnvironment implements ClasspathProvider {
 	}
 
 	private List<String> getClasspathElements(String classpath) {
-		return newArrayList(classpath.split(aa.worldline.vbu.infinitest.Runner.separatorOfJavaClassPath));//TODO was pathSeparator, that is changed to work with the current implementation on jenkins and cie...
+		return newArrayList(classpath.split(File.pathSeparator));
 	}
 
 	private String getJavaExecutable() {
