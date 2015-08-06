@@ -65,7 +65,7 @@ public class Runner {
 	}
 
 	public static File classDirectory() {
-		return new File(root + "/target/test-classes");
+		return new File(root + "/target/test-classes/");
 	}
 
 	public static File workingDirectory() {
@@ -73,12 +73,12 @@ public class Runner {
 	}
 
 	public static List<File> buildPaths() {
-		return asList(new File(root + "/target/classes"), classDirectory());
+		return asList(new File(root + "/target/classes/"), classDirectory());
 	}
 
 	public static Collection<File> getCollectionOfFileFromFolder(File folder) {
 		// Directory path here
-		System.out.println("[Infninitest debug]Folder=" + folder);
+		System.out.println("[Infninitest debug]Folder=" + folder + " class?:" + folder.getClass() + " is dir?:"+folder.isDirectory());
 		Collection<File> listOfFiles = FileUtils.listFiles(folder,
 				new org.apache.commons.io.filefilter.RegexFileFilter(
 						".*\\.class"), DirectoryFileFilter.DIRECTORY);
