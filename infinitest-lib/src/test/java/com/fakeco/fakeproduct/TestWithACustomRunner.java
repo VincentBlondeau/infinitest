@@ -32,4 +32,5 @@ import org.junit.runner.*;
 @SuppressWarnings("all")
 @RunWith(CustomRunner.class)
 public class TestWithACustomRunner {
+	Object toto = (Object) new FakeProduct().getSeven();
 }

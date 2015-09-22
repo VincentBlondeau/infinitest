@@ -2,27 +2,26 @@ package aa.worldline.vbu.infinitest;
 
 import static java.util.Arrays.asList;
 
-import java.applet.Applet;
-import java.awt.Color;
-import java.awt.Dimension;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
-import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import javax.swing.JApplet;
+
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.filefilter.DirectoryFileFilter;
+import org.apache.commons.io.filefilter.NotFileFilter;
+import org.apache.commons.io.filefilter.TrueFileFilter;
 import org.infinitest.ConcurrencyController;
 import org.infinitest.EventQueue;
 import org.infinitest.InfinitestCore;
@@ -64,16 +63,21 @@ public class Runner {
 		return classpath;
 	}
 
-	public static File classDirectory() {
-		return new File(root + "/target/test-classes/");
-	}
-
-	public static File workingDirectory() {
+		public static File workingDirectory() {
 		return new File(root);
 	}
 
 	public static List<File> buildPaths() {
-		return asList(new File(root + "/target/classes/"), classDirectory());
+		 Collection<File> allFolders  = FileUtils.listFilesAndDirs(workingDirectory(),
+				 	new NotFileFilter(TrueFileFilter.INSTANCE),
+					new TargetClassesFilter());
+		 List<File> selectedFiles = new ArrayList<File>(); 
+		 for(File file : allFolders){
+			 if(file.getName().equals("classes") || file.getName().equals("test-classes")){
+				 selectedFiles.add(file);
+			 }
+		 }
+		return selectedFiles;
 	}
 
 	public static Collection<File> getCollectionOfFileFromFolder(File folder) {
@@ -145,7 +149,7 @@ public class Runner {
 		Collections.sort(changeFiles, comparator);
 		executeAndSerialize(targetDirectory + "infinitestExport", core,
 				changeFiles, writer);
-		// executeAndSerialize("infinitestExport3", core, changeFiles, writer);
+		executeAndSerialize("infinitestExport3", core, changeFiles, writer);
 		// executeAndSerialize("infinitestExport4", core, changeFiles, writer);
 
 		System.out.println("[Infinitest]All treatments ended!");
