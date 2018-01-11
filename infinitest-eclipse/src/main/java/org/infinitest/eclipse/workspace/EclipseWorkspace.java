@@ -100,7 +100,6 @@ class EclipseWorkspace implements WorkspaceFacade {
 
 	private int updateProject(ProjectFacade project) throws CoreException {
 		RuntimeEnvironment environment = buildRuntimeEnvironment(project);
-
 		InfinitestCore core = coreRegistry.getCore(project.getLocationURI());
 		if (core == null) {
 			core = createCore(project, environment);

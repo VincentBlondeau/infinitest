@@ -9,7 +9,7 @@
 	<includeBaseDirectory>false</includeBaseDirectory>
 	<dependencySets>
 		<dependencySet>
-			<!-- décompresse les dépendances avant de les inclure dans le jar exécutable -->
+			<!-- Unpack the dependencies before their inclusion in the executable jar file -->
 			<unpack>true</unpack>
 			<scope>runtime</scope>
 			<useProjectArtifact>false</useProjectArtifact>

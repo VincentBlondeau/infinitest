@@ -1,3 +1,7 @@
+The modifications brought to this version of Infinitest allow to record the mapping between the changed source code and the tests that cover it. Files with the coverage are exported.
+
+Find after the readme of Infinitest:
+
 Notes for new developers
 =========================
 
